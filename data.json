@@ -1,0 +1,11 @@
+{
+
+    "cleaners": {
+        "one": {
+            "name": "Boris",
+            "city": "Manchester",
+            "PhoneNumber": "0987653521",
+            "userName": "Boz123"
+        } 
+}
+}

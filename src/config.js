@@ -1,5 +1,7 @@
 import Firebase from "firebase";
+
 const firebaseConfig = {
+	databaseURL: "https://cleanr-database-default-rtdb.europe-west1.firebasedatabase.app/",
 	"project_info": {
 		"project_number": "663946512724",
 		"project_id": "cleanr-database",
