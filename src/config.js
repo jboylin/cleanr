@@ -23,7 +23,7 @@ const firebaseConfig = {
 			],
 			"api_key": [
 				{
-					"current_key": "AIzaSyA7vU680y_0mCYdZ0WkWtRJX5llDCeC_4k"
+					"current_key": "process.env.API"
 				}
 			],
 			"services": {
