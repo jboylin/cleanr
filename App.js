@@ -46,7 +46,10 @@ export default function App() {
 						/>
 					)}
 				</Stack.Screen>
-				<Stack.Screen name="Sign Up" options={{ title: "Welcome" }}>
+				<Stack.Screen
+					name="Sign Up"
+					options={{ title: `Please enter ${userType} details` }}
+				>
 					{(props) => (
 						<SignUp {...props} userType={userType} setUserType={setUserType} />
 					)}
