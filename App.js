@@ -5,13 +5,15 @@ import { db } from "./src/config";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function App() {
-	const [data, setData] = useState(    {"cleaners": {
-		"one": {
-			"name": "",
-			"city": "",
-			"PhoneNumber": "",
-			"userName": ""
-		} }
+	const [data, setData] = useState({
+		cleaners: {
+			one: {
+				name: "",
+				city: "",
+				PhoneNumber: "",
+				userName: ""
+			}
+		}
 	});
 
 	useEffect(() => {
@@ -22,7 +24,10 @@ export default function App() {
 
 	return (
 		<View style={styles.container}>
-			<Text>Open up App.js to start working on your app {data.cleaners.one.name}!</Text>
+			<Text>
+				Open up App.js to start working on your app {data.cleaners.one.name}!
+			</Text>
+			<Text>ADDING THIS TO HAVE SOMETHING TO PUSH TO FRONTEND BRANCH</Text>
 			<StatusBar style="auto" />
 		</View>
 	);
@@ -33,6 +38,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: "#fff",
 		alignItems: "center",
-		justifyContent: "center",
-	},
+		justifyContent: "center"
+	}
 });
