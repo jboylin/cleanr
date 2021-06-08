@@ -18,6 +18,9 @@
 		"linebreak-style": ["error", "unix"],
 		"quotes": ["error", "double"],
 		"semi": ["error", "always"],
-		"react/prop-types": ["error", { "ignore": ["navigation"] }]
+		"react/prop-types": [
+			"error",
+			{ "ignore": ["navigation", "userType", "setUserType"] }
+		]
 	}
 }
