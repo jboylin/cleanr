@@ -3,10 +3,11 @@ import React, { useEffect, useState } from "react";
 import { db } from "./src/config";
 
 import { StyleSheet, Text, View } from "react-native";
+import { writeUserData } from "./backendFuncs";
 
 export default function App() {
 	const [data, setData] = useState(    {"cleaners": {
-		"one": {
+		1: {
 			"name": "",
 			"city": "",
 			"PhoneNumber": "",
@@ -19,10 +20,15 @@ export default function App() {
 			setData(ourData.val());
 		});
 	}, []);
+	
+
+
+	console.log(typeof writeUserData);
+	writeUserData("Joe");
 
 	return (
 		<View style={styles.container}>
-			<Text>Open up App.js to start working on your app {data.cleaners.one.name}!</Text>
+			<Text>Open up App.js to start working on your app {data.cleaners[1].name}!</Text>
 			<StatusBar style="auto" />
 		</View>
 	);
