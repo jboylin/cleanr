@@ -3,6 +3,7 @@ import React from "react";
 // import { useEffect, useState } from "react";
 // import { db } from "./src/config";
 // import { StyleSheet } from "react-native";
+import { useState } from "react";
 import UserType from "./components/UserType";
 import SignUp from "./components/SignUp";
 import "react-native-gesture-handler";
@@ -12,39 +13,47 @@ import { createStackNavigator } from "@react-navigation/stack";
 const Stack = createStackNavigator();
 
 export default function App() {
-	// const [data, setData] = useState({
-	// 	cleaners: {
-	// 		one: {
-	// 			name: "",
-	// 			city: "",
-	// 			PhoneNumber: "",
-	// 			userName: ""
-	// 		}
-	// 	}
-	// });
+  const [userType, setUserType] = useState("");
+  // const [data, setData] = useState({
+  // 	cleaners: {
+  // 		one: {
+  // 			name: "",
+  // 			city: "",
+  // 			PhoneNumber: "",
+  // 			userName: ""
+  // 		}
+  // 	}
+  // });
 
-	// useEffect(() => {
-	// 	db.ref("/").on("value", (ourData) => {
-	// 		setData(ourData.val());
-	// 	});
-	// }, []);
+  // useEffect(() => {
+  // 	db.ref("/").on("value", (ourData) => {
+  // 		setData(ourData.val());
+  // 	});
+  // }, []);
 
-	return (
-		<NavigationContainer>
-			<Stack.Navigator>
-				<Stack.Screen
-					name="Choose User"
-					component={UserType}
-					options={{ title: "Choose your user type" }}
-				/>
-				<Stack.Screen
-					name="Sign Up"
-					component={SignUp}
-					options={{ title: "Welcome" }}
-				/>
-			</Stack.Navigator>
-		</NavigationContainer>
-	);
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Choose User"
+          options={{ title: "Choose your user type" }}
+        >
+          {(props) => (
+            <UserType
+              {...props}
+              userType={userType}
+              setUserType={setUserType}
+            />
+          )}
+        </Stack.Screen>
+        <Stack.Screen name="Sign Up" options={{ title: "Welcome" }}>
+          {(props) => (
+            <SignUp {...props} userType={userType} setUserType={setUserType} />
+          )}
+        </Stack.Screen>
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
 
 // const styles = StyleSheet.create({
@@ -55,3 +64,7 @@ export default function App() {
 // 		justifyContent: "center"
 // 	}
 // });
+
+<Stack.Screen name="Home">
+  {(props) => <HomeScreen {...props} extraData={someData} />}
+</Stack.Screen>;
