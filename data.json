@@ -1,11 +1,16 @@
 {
-
-    "cleaners": {
-        "one": {
-            "name": "Boris",
-            "city": "Manchester",
-            "PhoneNumber": "0987653521",
-            "userName": "Boz123"
-        } 
-}
+  "cleaners": {
+    "one": {
+      "name": "Boris",
+      "city": "Manchester",
+      "PhoneNumber": "0987653521",
+      "userName": "Boz123"
+    },
+    "two": {
+      "name": "Sage",
+      "city": "Manchester",
+      "PhoneNumber": "0987658721",
+      "userName": "Sage321"
+    }
+  }
 }
