@@ -23,7 +23,6 @@ export default function App() {
     });
   }, []);
 
-  console.log(typeof writeUserData);
   writeUserData("Joe");
 
   return (
