@@ -1,47 +1,63 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
 import { db } from "./src/config";
+import Firebase from "firebase";
 
 import { StyleSheet, Text, View } from "react-native";
 import { writeUserData } from "./backendFuncs";
 
 export default function App() {
-	const [data, setData] = useState({
-		cleaners: {
-			1: {
-				name: "",
-				city: "",
-				PhoneNumber: "",
-				userName: "",
-			},
-		},
-	});
+  Firebase.auth()
+    .signInAnonymously()
+    .then(() => {
+      console.log("User signed in anonymously");
+    })
+    .catch((error) => {
+      if (error.code === "auth/operation-not-allowed") {
+        console.log("Enable anonymous in your firebase console.");
+      }
 
-	useEffect(() => {
-		db.ref("/").on("value", (ourData) => {
-			setData(ourData.val());
-		});
-	}, []);
+      console.error(error);
+    });
+  // Set an initializing state whilst Firebase connects
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
 
-	writeUserData("Joe");
+  // Handle user state changes
+  function onAuthStateChanged(user) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
 
-	return (
-		<View style={styles.container}>
-			<Text>
-        Open up App.js to start working on your app {data.cleaners[1].name}!
-			</Text>
-			<StatusBar style="auto" />
-		</View>
-	);
+  useEffect(() => {
+    const subscriber = Firebase.auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  if (initializing) return null;
+
+  if (!user) {
+    return (
+      <View>
+        <Text>Login</Text>
+      </View>
+    );
+  }
+
+  return (
+    <View>
+      <Text>Welcome {user.email}</Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: "#fff",
-		alignItems: "center",
-		justifyContent: "center",
-	},
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
 
-//peter
+//petr

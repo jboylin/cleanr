@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "663946512724",
+    "firebase_url": "https://cleanr-database-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "cleanr-database",
     "storage_bucket": "cleanr-database.appspot.com"
   },
@@ -20,7 +21,7 @@
       ],
       "api_key": [
         {
-          "current_key": "process.env.API"
+          "current_key": "AIzaSyA7vU680y_0mCYdZ0WkWtRJX5llDCeC_4k"
         }
       ],
       "services": {
@@ -29,6 +30,13 @@
             {
               "client_id": "663946512724-ppuq8lkqcrc5lfh9kolt0girvrehsl1c.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "663946512724-3sobr8t8j9q3ohfe83gkian35tuiufat.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.name.cleanr"
+              }
             }
           ]
         }
