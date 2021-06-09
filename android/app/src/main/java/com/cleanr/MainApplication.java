@@ -3,6 +3,8 @@ package com.cleanr;
 import android.app.Application;
 import android.content.Context;
 import android.net.Uri;
+import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
+import io.invertase.firebase.database.ReactNativeFirebaseDatabasePackage;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
@@ -41,6 +43,19 @@ public class MainApplication extends Application implements ReactApplication {
     public boolean getUseDeveloperSupport() {
       return BuildConfig.DEBUG;
     }
+
+    // @Override
+    //  protected List<ReactPackage> getPackages() {
+    // return Arrays.asList(
+    // new MainReactPackage(),
+    // new ReactNativeFirebaseAppPackage()),
+    // }
+
+ protected List<ReactPackage> getPackages() {
+    return Arrays.asList(
+    new MainReactPackage(),
+    new ReactNativeFirebaseAppPackage(),
+    new ReactNativeFirebaseDatabasePackage(),
 
     @Override
     protected List<ReactPackage> getPackages() {
