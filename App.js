@@ -1,55 +1,96 @@
 // import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
-// import { db } from "./src/config";
+import { db } from "./src/config";
 import Firebase from "firebase";
 
-import { Text, View } from "react-native";
+import { Button, Text, View } from "react-native";
 // import { writeUserData } from "./backendFuncs";
 
-export default function App() {
-	Firebase.auth()
-		.signInAnonymously()
-		.then(() => {
-			console.log("User signed in anonymously");
-		})
-		.catch((error) => {
-			if (error.code === "auth/operation-not-allowed") {
-				console.log("Enable anonymous in your firebase console.");
-			}
+const App = () => {
+  const logIn = () => {
+    {
+      Firebase.auth()
+        .signInWithEmailAndPassword(
+          "chuck.norris@example.com",
+          "SuperSecretPassword!2"
+        )
+        .then(() => {
+          console.log("User account created & signed in!");
+        })
+        .catch((error) => {
+          if (error.code === "auth/email-already-in-use") {
+            console.log("That email address is already in use!");
+          }
 
-			console.error(error);
-		});
-	// Set an initializing state whilst Firebase connects
-	const [initializing, setInitializing] = useState(true);
-	const [user, setUser] = useState();
+          if (error.code === "auth/invalid-email") {
+            console.log("That email address is invalid!");
+          }
 
-	// Handle user state changes
-	function onAuthStateChanged(user) {
-		setUser(user);
-		if (initializing) setInitializing(false);
-	}
+          console.error(error);
+        });
+    }
+  };
+  const createUser = () => {
+    Firebase.auth()
+      .createUserWithEmailAndPassword("harry.the.brain@example.com", "harry123")
+      .then(() => {
+        console.log("User account created & signed in!");
+      })
+      .catch((error) => {
+        if (error.code === "auth/email-already-in-use") {
+          console.log("That email address is already in use!");
+        }
 
-	useEffect(() => {
-		const subscriber = Firebase.auth().onAuthStateChanged(onAuthStateChanged);
-		return subscriber; // unsubscribe on unmount
-	}, []);
+        if (error.code === "auth/invalid-email") {
+          console.log("That email address is invalid!");
+        }
 
-	if (initializing) return null;
+        console.error(error);
+      });
+  };
 
-	if (!user) {
-		return (
-			<View>
-				<Text>Login</Text>
-			</View>
-		);
-	}
+  const logOff = () => {
+    Firebase.auth()
+      .signOut()
+      .then(() => console.log("User signed out!"));
+  };
 
-	return (
-		<View>
-			<Text>Welcome {user.email}</Text>
-		</View>
-	);
-}
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+
+  // Handle user state changes
+  function onAuthStateChanged(user) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
+
+  useEffect(() => {
+    const subscriber = Firebase.auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  if (initializing) return null;
+
+  if (!user) {
+    return (
+      <View>
+        <Text>Login</Text>
+        <Button title="Create User" onPress={createUser} />
+        <Button title="Log in as Chuck" onPress={logIn} />
+      </View>
+    );
+  }
+
+  return (
+    <View>
+      <Text>Welcome {user.email}</Text>
+      <Button title="logOff" onPress={logOff} />
+    </View>
+  );
+};
+
+export default App;
+//
 
 // const styles = StyleSheet.create({
 //   container: {
